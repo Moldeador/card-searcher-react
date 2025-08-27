@@ -1,14 +1,43 @@
 import type { CardInfo } from "../utils";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-export default function Thumbnail({ cardInfo, onCardSelect }: { cardInfo: CardInfo, onCardSelect: (card: CardInfo) => void }) {
-    function handleClick() {
-        onCardSelect(cardInfo);
-    }
-    return (
-        <div className="card" onClick={handleClick}>
-            {cardInfo.image_uris ? <img src={cardInfo.image_uris.small} /> : (cardInfo.card_faces ? <img src={cardInfo.card_faces[0].image_uris.small} /> : undefined)}
-            <p> {cardInfo.name}</p>
-        </div>
-    )
+export default function Thumbnail({
+  cardInfo,
+  onCardSelect,
+}: {
+  cardInfo: CardInfo;
+  onCardSelect: (card: CardInfo) => void;
+}) {
+  function handleClick() {
+    onCardSelect(cardInfo);
+  }
 
+  const image_url = cardInfo.image_uris
+    ? cardInfo.image_uris.small
+    : cardInfo.card_faces
+    ? cardInfo.card_faces[0].image_uris.small
+    : "";
+
+  return (
+    <div onClick={handleClick}>
+      <Card>
+        <CardHeader>
+          <CardDescription className="flex justify-center">
+            {cardInfo.name}
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="flex justify-center">
+          <img className="rounded-md border-4 border-white" src={image_url} />
+        </CardContent>
+      </Card>
+    </div>
+  );
 }
