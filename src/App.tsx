@@ -26,6 +26,12 @@ function App() {
     setSelectedCard(undefined);
     setIsLanding(false);
   }
+
+  function handleReset() {
+    setSelectedCard(undefined);
+    setIsLanding(true);
+  }
+
   return (
     <div id="my_app" className="flex flex-col items-center justify-center">
       {isLanding ? (
@@ -35,7 +41,9 @@ function App() {
         </>
       ) : (
         <span className="flex min-w-full justify-between">
-          <h2 className="m-8">Card Searcher</h2>
+          <h2 className="m-8" onClick={handleReset}>
+            Card Searcher
+          </h2>
           <SearchBar onSearch={handleSearch} />
         </span>
       )}
