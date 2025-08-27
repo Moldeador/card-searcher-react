@@ -30,7 +30,7 @@ export default function Thumbnail({
     <div onClick={handleClick}>
       <Card>
         <CardHeader>
-          <CardDescription className="flex justify-center">
+          <CardDescription className="flex justify-center h-[3EM]">
             {cardInfo.name}
           </CardDescription>
         </CardHeader>
