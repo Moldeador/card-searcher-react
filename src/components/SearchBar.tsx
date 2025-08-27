@@ -16,7 +16,7 @@ export default function SearchBar({ onSearch }: { onSearch: (query: string) => v
 
 
     return (
-        <div className="flex w-full max-w-sm items-center gap-2">
+        <div className="flex w-full max-w-sm items-center gap-2 m-8">
             <Input value={value} onChange={e => setValue(e.target.value)} onKeyDown={handleKeyDown} placeholder="Card serach..." />
 
             <Button type="submit" variant="outline" onClick={handleClick}> Search</Button>

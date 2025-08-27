@@ -2,12 +2,12 @@ import { useState } from 'react'
 import './App.css'
 import SearchBar from './components/SearchBar'
 import type { CardInfo } from './utils'
-import Thumbnail from './components/Thumbnail'
 import Gallery from './components/Gallery'
 
 
 
 function App() {
+  const [isLanding, setIsLanding] = useState(true);
   const [cardsInfo, setCardsInfo] = useState<Array<CardInfo>>([]);
   const [selectedCard, setSelectedCard] = useState<CardInfo>();
 
@@ -23,17 +23,25 @@ function App() {
       console.log(data);
     })
     setSelectedCard(undefined);
+    setIsLanding(false);
   }
   return (
-    <>
-      <h1>Card Searcher</h1>
+    <div id='my_app' className='flex flex-col items-center justify-center'>
+      {isLanding ?
+        <>
+          <h1>Card Searcher</h1>
+          <SearchBar onSearch={handleSearch} />
+        </>
+        :
+        <span className='flex min-w-full justify-between'>
+          <h2 className='m-8'>Card Searcher</h2>
+          <SearchBar onSearch={handleSearch} />
+        </span>
+      }
       {selectedCard ? (selectedCard.image_uris ? <img src={selectedCard.image_uris.normal} /> : (selectedCard.card_faces ? <img src={selectedCard.card_faces[0].image_uris.normal} /> : undefined)) : undefined}
 
-      <div>
-        <SearchBar onSearch={handleSearch} />
-      </div>
-      {!selectedCard && <Gallery cardsInfo={cardsInfo} setSelectedCard={setSelectedCard} />}
-    </>
+      {!isLanding && <Gallery cardsInfo={cardsInfo} setSelectedCard={setSelectedCard} />}
+    </div>
   )
 }
 

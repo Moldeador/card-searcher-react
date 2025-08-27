@@ -32,10 +32,31 @@ body {
   min-height: 100vh;
 }
 
+#root {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#my_app {
+  margin: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
 h1 {
   font-family: "Jacquard 24", system-ui;
   font-weight: 400;
   font-size: 128px;
+  font-style: normal;
+}
+
+h2 {
+  font-family: "Jacquard 24", system-ui;
+  font-weight: 400;
+  font-size: 64px;
   font-style: normal;
 }
 
@@ -49,7 +70,7 @@ button {
   transition: background-color 0.25s;
 }
 button:hover {
-  background-color: #333333;
+  background-color: #3c0235;
 }
 button:focus,
 button:focus-visible {
