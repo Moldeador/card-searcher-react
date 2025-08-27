@@ -1,10 +1,9 @@
-import { useState } from 'react'
-import './App.css'
-import SearchBar from './components/SearchBar'
-import type { CardInfo } from './utils'
-import Gallery from './components/Gallery'
-
-
+import { useState } from "react";
+import "./App.css";
+import SearchBar from "./components/SearchBar";
+import type { CardInfo } from "./utils";
+import Gallery from "./components/Gallery";
+import BigDisplay from "./components/BigDisplay";
 
 function App() {
   const [isLanding, setIsLanding] = useState(true);
@@ -15,34 +14,39 @@ function App() {
     const url = "https://api.scryfall.com/cards/search?q=";
     const uriComponent = encodeURIComponent(query);
     const responsePormise = fetch(url + uriComponent);
-    responsePormise.then(function (response) {
-      return response.json();
-    }).then(function (json) {
-      const data: Array<CardInfo> = json.data;
-      setCardsInfo(data);
-      console.log(data);
-    })
+    responsePormise
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (json) {
+        const data: Array<CardInfo> = json.data;
+        setCardsInfo(data);
+        console.log(data);
+      });
     setSelectedCard(undefined);
     setIsLanding(false);
   }
   return (
-    <div id='my_app' className='flex flex-col items-center justify-center'>
-      {isLanding ?
+    <div id="my_app" className="flex flex-col items-center justify-center">
+      {isLanding ? (
         <>
           <h1>Card Searcher</h1>
           <SearchBar onSearch={handleSearch} />
         </>
-        :
-        <span className='flex min-w-full justify-between'>
-          <h2 className='m-8'>Card Searcher</h2>
+      ) : (
+        <span className="flex min-w-full justify-between">
+          <h2 className="m-8">Card Searcher</h2>
           <SearchBar onSearch={handleSearch} />
         </span>
-      }
-      {selectedCard ? (selectedCard.image_uris ? <img src={selectedCard.image_uris.normal} /> : (selectedCard.card_faces ? <img src={selectedCard.card_faces[0].image_uris.normal} /> : undefined)) : undefined}
+      )}
 
-      {!isLanding && <Gallery cardsInfo={cardsInfo} setSelectedCard={setSelectedCard} />}
+      {selectedCard && <BigDisplay cardInfo={selectedCard} />}
+
+      {!isLanding && !selectedCard && (
+        <Gallery cardsInfo={cardsInfo} setSelectedCard={setSelectedCard} />
+      )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

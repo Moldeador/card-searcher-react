@@ -35,7 +35,10 @@ export default function Thumbnail({
           </CardDescription>
         </CardHeader>
         <CardContent className="flex justify-center">
-          <img className="rounded-md border-4 border-white" src={image_url} />
+          <img
+            className="m-2 rounded-md border-1 border-white"
+            src={image_url}
+          />
         </CardContent>
       </Card>
     </div>
