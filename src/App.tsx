@@ -3,11 +3,12 @@ import './App.css'
 import SearchBar from './components/SearchBar'
 import type { CardInfo } from './utils'
 import Thumbnail from './components/Thumbnail'
+import Gallery from './components/Gallery'
 
 
 
 function App() {
-  const [cardsInfo, setCardsInfo] = useState<Array<CardInfo>>();
+  const [cardsInfo, setCardsInfo] = useState<Array<CardInfo>>([]);
   const [selectedCard, setSelectedCard] = useState<CardInfo>();
 
   function handleSearch(query: string) {
@@ -31,16 +32,7 @@ function App() {
       <div>
         <SearchBar onSearch={handleSearch} />
       </div>
-      {!selectedCard && <div>
-        <ul>
-          {cardsInfo?.map(function (card: CardInfo) {
-            return <li key={card.name}>
-              <Thumbnail cardInfo={card} onCardSelect={setSelectedCard} />
-
-            </li>;
-          })}
-        </ul>
-      </div>}
+      {!selectedCard && <Gallery cardsInfo={cardsInfo} setSelectedCard={setSelectedCard} />}
     </>
   )
 }

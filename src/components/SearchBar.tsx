@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 
 export default function SearchBar({ onSearch }: { onSearch: (query: string) => void }) {
 
@@ -14,10 +16,10 @@ export default function SearchBar({ onSearch }: { onSearch: (query: string) => v
 
 
     return (
-        <>
-            <input value={value} onChange={e => setValue(e.target.value)} onKeyDown={handleKeyDown} />
+        <div className="flex w-full max-w-sm items-center gap-2">
+            <Input value={value} onChange={e => setValue(e.target.value)} onKeyDown={handleKeyDown} placeholder="Card serach..." />
 
-            <button style={{ margin: "20px" }} onClick={handleClick}>Search</button>
-        </>
+            <Button type="submit" variant="outline" onClick={handleClick}> Search</Button>
+        </div>
     )
 }
