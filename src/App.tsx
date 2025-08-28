@@ -41,7 +41,7 @@ function App() {
         </>
       ) : (
         <span className="flex min-w-full justify-between">
-          <h2 className="m-8" onClick={handleReset}>
+          <h2 className="m-8 cursor-pointer" onClick={handleReset}>
             Card Searcher
           </h2>
           <SearchBar onSearch={handleSearch} />
