@@ -1,12 +1,9 @@
 import type { CardInfo } from "../utils";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 
 export default function Thumbnail({
